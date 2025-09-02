@@ -7,9 +7,9 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Minarco Insurance - Trusted Coverage for Families, Truckers & Businesses",
+  title: "Minarco Insurance Agency | Auto, Home & Business Insurance in Houston, TX",
   description:
-    "Helping families, truckers, and business owners get the coverage they need — fast, simple, and honest. Insurance you understand. Coverage you can trust.",
+    "Get personalized insurance coverage from Sam Minkara at Minarco Insurance. Serving Houston with competitive rates on auto, home, business, and commercial insurance. Licensed professional with 2+ years experience. Call (832) 476-9999 for your free quote.",
   generator: "v0.app",
 }
 
