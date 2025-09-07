@@ -1,10 +1,32 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export function Contact() {
+  const router = useRouter()
+
+  // Mapping service names to their routes
+  const serviceRoutes: { [key: string]: string } = {
+    "Auto Insurance": "/services/auto",
+    "Homeowners Insurance": "/services/home",
+    "Business Insurance": "/services/commercial",
+    "Commercial Auto": "/services/commercial",
+    "Life Insurance": "/services/life",
+    "Renters Insurance": "/services/renters"
+  }
+
+  const handleServiceClick = (serviceType: string) => {
+    const route = serviceRoutes[serviceType]
+    if (route) {
+      router.push(route)
+    }
+  }
+
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 2xl:py-40 bg-gradient-to-b from-white to-[#edf7f6]/30">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
@@ -83,7 +105,7 @@ export function Contact() {
             </CardContent>
           </Card>
 
-          <Card className="xl:col-span-3 order-1 lg:order-2 shadow-lg sm:shadow-2xl xl:shadow-3xl border-0 bg-gradient-to-br from-white to-[#f98125]/5">
+          <Card id="quote-form" className="xl:col-span-3 order-1 lg:order-2 shadow-lg sm:shadow-2xl xl:shadow-3xl border-0 bg-gradient-to-br from-white to-[#f98125]/5">
             <CardHeader className="pb-6 sm:pb-8 xl:pb-10">
               <CardTitle className="text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl text-[#11224d] flex items-center">
                 <Phone className="h-5 w-5 sm:h-6 sm:w-6 xl:h-8 xl:w-8 mr-2 sm:mr-3 xl:mr-4 text-[#218eec]" />
@@ -130,7 +152,8 @@ export function Contact() {
               <Button
                 key={type}
                 variant="outline"
-                className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl"
+                onClick={() => handleServiceClick(type)}
+                className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
               >
                 {type}
               </Button>

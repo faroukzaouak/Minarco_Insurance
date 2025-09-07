@@ -4,9 +4,7 @@ import { CheckCircle, Shield, Clock, DollarSign } from "lucide-react"
 const features = [
   "Thorough analysis of your insurance needs",
   "Fast and streamlined application process",
-  "Full control over your policy decisions",  
   "Competitive rates that save you money",
-  "Bilingual service in English & Spanish",
   "Experienced team with 2+ years in the industry",
 ]
 
@@ -31,60 +29,44 @@ export function About() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 xl:grid-cols-5 gap-8 sm:gap-12 xl:gap-16 items-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
-          <div className="order-2 lg:order-1 xl:col-span-3">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-foreground mb-4 sm:mb-6 xl:mb-8">
-              Building Your Financial Security
-            </h2>
-            <p className="text-base sm:text-lg xl:text-xl text-muted-foreground mb-4 sm:mb-6 xl:mb-8 text-pretty leading-relaxed">
-              At Minarco Insurance Agency, we understand that every client has unique needs. Our personalized approach 
-              ensures you get the right coverage at the right price, with the service you deserve.
-            </p>
-            <p className="text-base sm:text-lg xl:text-xl text-muted-foreground mb-6 sm:mb-8 xl:mb-10 text-pretty leading-relaxed">
-              Whether you're protecting your family, your business, or your commercial fleet, we work closely with you 
-              to create comprehensive coverage that grows with your changing needs.
-            </p>
-
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:gap-6 mb-4 sm:mb-6 xl:mb-8">
-              <div className="flex items-center p-2 xl:p-3 rounded-lg xl:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
-                <Shield className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 text-primary mr-2 sm:mr-3 xl:mr-4 flex-shrink-0" />
-                <span className="text-xs sm:text-sm xl:text-base">Comprehensive Analysis</span>
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-6 sm:mb-8 xl:mb-10">
+            Your Insurance Partner
+          </h2>
+          <p className="text-base sm:text-lg xl:text-xl text-muted-foreground mb-8 sm:mb-10 xl:mb-12 max-w-3xl mx-auto leading-relaxed">
+            Located in Houston, Texas, Minarco Insurance Agency is your local gateway to comprehensive insurance solutions. 
+            We make insurance simple, affordable, and accessible for everyone.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 xl:gap-10 max-w-5xl mx-auto">
+            <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
               </div>
-              <div className="flex items-center p-2 xl:p-3 rounded-lg xl:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 text-primary mr-2 sm:mr-3 xl:mr-4 flex-shrink-0" />
-                <span className="text-xs sm:text-sm xl:text-base">Quick Processing</span>
-              </div>
-              <div className="flex items-center p-2 xl:p-3 rounded-lg xl:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
-                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 text-primary mr-2 sm:mr-3 xl:mr-4 flex-shrink-0" />
-                <span className="text-xs sm:text-sm xl:text-base">Policy Control</span>
-              </div>
-              <div className="flex items-center p-2 xl:p-3 rounded-lg xl:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
-                <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 text-primary mr-2 sm:mr-3 xl:mr-4 flex-shrink-0" />
-                <span className="text-xs sm:text-sm xl:text-base">Competitive Rates</span>
-              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">Licensed & Insured</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Fully licensed professionals operating with complete transparency and regulatory compliance.
+              </p>
             </div>
-          </div>
-
-          <div className="relative order-1 lg:order-2 xl:col-span-2">
-            <div className="bg-gradient-to-br from-primary/10 to-[#f98125]/10 rounded-xl sm:rounded-2xl xl:rounded-3xl p-6 sm:p-8 xl:p-12 text-center shadow-lg xl:shadow-2xl">
-              <div className="relative inline-block mb-4 sm:mb-6 xl:mb-8">
-                <img
-                  src="/sam-minkara-headshot.jpg"
-                  alt="Sam Minkara - Insurance Agent"
-                  className="rounded-xl sm:rounded-2xl xl:rounded-3xl mx-auto w-48 sm:w-60 lg:w-72 xl:w-80 2xl:w-96 h-56 sm:h-64 lg:h-80 xl:h-96 2xl:h-[28rem] object-cover shadow-lg sm:shadow-xl xl:shadow-2xl border-2 sm:border-4 xl:border-6 border-white"
-                />
-                <div className="absolute -bottom-2 sm:-bottom-3 xl:-bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-[#f98125] text-white px-4 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 rounded-full shadow-lg xl:shadow-xl">
-                  <div className="text-sm sm:text-lg xl:text-xl 2xl:text-2xl font-bold">Sam Minkara</div>
-                  <div className="text-xs sm:text-sm xl:text-base opacity-90">Licensed Insurance Agent</div>
-                </div>
+            
+            <div className="bg-gradient-to-br from-[#f98125]/5 to-[#f98125]/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#f98125] rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
               </div>
-              <div className="mt-6 sm:mt-8 xl:mt-12 space-y-2 xl:space-y-3 text-muted-foreground">
-                <p className="text-xs sm:text-sm xl:text-base font-medium">"Your trusted partner in protection"</p>
-                <div className="flex justify-center items-center space-x-3 sm:space-x-4 xl:space-x-6 text-xs xl:text-sm">
-                  <span className="flex items-center"><Shield className="h-2.5 w-2.5 sm:h-3 sm:w-3 xl:h-4 xl:w-4 mr-1" />Licensed Professional</span>
-                  <span className="flex items-center"><CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 xl:h-4 xl:w-4 mr-1" />2+ Years Experience</span>
-                </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">No Hidden Fees</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Transparent pricing with no surprise charges or hidden costs. What you see is what you pay.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-secondary/5 to-secondary/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-secondary rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
               </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">Same-Day Quotes</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Get competitive quotes within hours, not days. Fast turnaround for busy lifestyles.
+              </p>
             </div>
           </div>
         </div>

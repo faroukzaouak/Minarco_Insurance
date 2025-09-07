@@ -5,17 +5,20 @@ import { About } from "@/components/about"
 import { Testimonials } from "@/components/testimonials"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import MainContentTransition from "@/components/main-content-transition"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <Hero />
-      <Services />
-      <About />
-      <Testimonials />
-      <Contact />
+      <MainContentTransition>
+        <Hero />
+        <Services />
+        <About />
+        <Testimonials />
+        <Contact />
+      </MainContentTransition>
       <Footer />
-    </main>
+    </div>
   )
 }

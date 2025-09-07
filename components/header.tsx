@@ -2,10 +2,52 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, Mail, MapPin } from "lucide-react"
+import { Menu, X, Phone, Mail, MapPin, ChevronDown } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+const insuranceServices = [
+  { name: "Auto Insurance", href: "/services/auto" },
+  { name: "Home Insurance", href: "/services/home" },
+  { name: "Life Insurance", href: "/services/life" },
+  { name: "Commercial Insurance", href: "/services/commercial" },
+  { name: "Health Insurance", href: "/services/health" },
+  { name: "Renters Insurance", href: "/services/renters" },
+]
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const pathname = usePathname()
+
+  const handleGetQuote = () => {
+    // Check if we're on a page that has a quote form
+    const pagesWithQuoteForms = [
+      '/', // home page
+      '/services/auto',
+      '/services/home', 
+      '/services/life',
+      '/services/commercial',
+      '/services/health',
+      '/services/renters',
+      '/contact'
+    ]
+    
+    if (pagesWithQuoteForms.includes(pathname)) {
+      // Scroll to quote form on current page
+      const quoteForm = document.getElementById('quote-form')
+      if (quoteForm) {
+        quoteForm.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
+    } else {
+      // If no quote form on current page, go to contact page
+      window.location.href = '/contact#quote-form'
+    }
+    setIsMenuOpen(false) // Close mobile menu after clicking
+  }
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact')
@@ -59,15 +101,44 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex space-x-6 lg:space-x-8">
-            <a href="#services" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
-              Services
-            </a>
-            <a href="#about" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
+            <Link href="/" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
+              Home
+            </Link>
+            <Link href="/about" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
               About
-            </a>
-            <a href="#contact" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
+            </Link>
+            <div className="relative group">
+              <button 
+                className="flex items-center text-sm lg:text-base text-foreground hover:text-primary transition-colors"
+                onMouseEnter={() => setIsServicesDropdownOpen(true)}
+                onMouseLeave={() => setIsServicesDropdownOpen(false)}
+              >
+                Services
+                <ChevronDown className="ml-1 h-3 w-3 lg:h-4 lg:w-4" />
+              </button>
+              <div 
+                className={`absolute left-0 top-full mt-2 w-56 bg-white border border-border rounded-lg shadow-lg z-50 transition-all duration-200 ${
+                  isServicesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}
+                onMouseEnter={() => setIsServicesDropdownOpen(true)}
+                onMouseLeave={() => setIsServicesDropdownOpen(false)}
+              >
+                <div className="py-2">
+                  {insuranceServices.map((service) => (
+                    <Link
+                      key={service.name}
+                      href={service.href}
+                      className="block px-4 py-3 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <Link href="/contact" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
               Contact
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
@@ -75,7 +146,7 @@ export function Header() {
               <Phone className="h-3 w-3 lg:h-4 lg:w-4 mr-1 lg:mr-2" />
               <span className="hidden lg:inline">(832) 476-9999</span>
             </a>
-            <Button onClick={scrollToContact} className="text-sm lg:text-base px-4 lg:px-6 py-2 bg-[#f19953] hover:bg-[#e08843] text-white">Get Quote</Button>
+            <Button onClick={handleGetQuote} className="text-sm lg:text-base px-4 lg:px-6 py-2 bg-[#f19953] hover:bg-[#e08843] text-white">Get Quote</Button>
           </div>
 
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -86,20 +157,34 @@ export function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
-              <a href="#services" className="text-foreground hover:text-primary transition-colors">
-                Services
-              </a>
-              <a href="#about" className="text-foreground hover:text-primary transition-colors">
+              <Link href="/" className="text-foreground hover:text-primary transition-colors">
+                Home
+              </Link>
+              <Link href="/about" className="text-foreground hover:text-primary transition-colors">
                 About
-              </a>
-              <a href="#contact" className="text-foreground hover:text-primary transition-colors">
+              </Link>
+              <div className="space-y-2">
+                <div className="text-foreground font-medium">Services</div>
+                <div className="pl-4 space-y-2">
+                  {insuranceServices.map((service) => (
+                    <Link
+                      key={service.name}
+                      href={service.href}
+                      className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
                 Contact
-              </a>
+              </Link>
               <a href="tel:8324769999" className="flex items-center text-sm text-foreground hover:text-primary">
                 <Phone className="h-4 w-4 mr-2" />
                 (832) 476-9999
               </a>
-              <Button onClick={scrollToContact} className="w-fit bg-[#f19953] hover:bg-[#e08843] text-white">Get Quote</Button>
+              <Button onClick={handleGetQuote} className="w-fit bg-[#f19953] hover:bg-[#e08843] text-white">Get Quote</Button>
             </nav>
           </div>
         )}

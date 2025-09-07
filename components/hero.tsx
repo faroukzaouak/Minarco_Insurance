@@ -62,7 +62,7 @@ export function Hero() {
                 </div>
                 <div>
                   <div className="font-semibold text-sm sm:text-base xl:text-lg text-[#11224d]">68+</div>
-                  <div className="text-xs sm:text-sm xl:text-base text-[#193a6f]">Happy Clients</div>
+                  <div className="text-xs sm:text-sm xl:text-base text-[#193a6f]">Satisfied Clients</div>
                 </div>
               </div>
             </div>
