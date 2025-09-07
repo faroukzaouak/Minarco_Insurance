@@ -40,21 +40,6 @@ const values = [
   }
 ]
 
-const team = [
-  {
-    name: "Sam Minkara",
-    role: "Founder & Lead Insurance Advisor",
-    description: "With over 2 years in the insurance industry, Sam founded Minarco Insurance to provide personalized, honest insurance solutions to Houston families.",
-    specialties: ["Auto Insurance", "Homeowners", "Life Insurance"]
-  },
-  {
-    name: "Expert Team",
-    role: "Licensed Insurance Professionals",
-    description: "Our carefully selected team of licensed professionals brings decades of combined experience in protecting what matters most.",
-    specialties: ["Commercial Insurance", "Health Plans", "Risk Assessment"]
-  }
-]
-
 export default function AboutPage() {
   const router = useRouter()
 
@@ -72,6 +57,16 @@ export default function AboutPage() {
     const route = serviceRoutes[serviceType]
     if (route) {
       router.push(route)
+    }
+  }
+
+  const scrollToQuoteForm = () => {
+    const quoteSection = document.getElementById('quote-form-section')
+    if (quoteSection) {
+      quoteSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
     }
   }
 
@@ -170,47 +165,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Team Section */}
-        <section className="py-16 sm:py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Meet Our Team</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Licensed professionals dedicated to protecting what matters most to you.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {team.map((member, index) => (
-                <Card key={index} className="border-0 shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Users className="h-8 w-8 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-foreground mb-1">{member.name}</h3>
-                        <p className="text-primary font-medium mb-3">{member.role}</p>
-                        <p className="text-muted-foreground mb-4">{member.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {member.specialties.map((specialty, idx) => (
-                            <span 
-                              key={idx}
-                              className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
-                            >
-                              {specialty}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Why Choose Us Section */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -253,19 +207,20 @@ export default function AboutPage() {
             <p className="text-lg text-white/90 mb-8">
               Join hundreds of Houston families who trust Minarco Insurance with their protection needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+            <div className="flex justify-center">
+              <Button 
+                size="lg" 
+                onClick={scrollToQuoteForm}
+                className="bg-white text-primary hover:bg-white/90"
+              >
                 Get Your Quote
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                Contact Us Today
               </Button>
             </div>
           </div>
         </section>
 
         {/* Quote Form Section - Same as home page */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 2xl:py-40 bg-gradient-to-b from-white to-[#edf7f6]/30">
+        <section id="quote-form-section" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 2xl:py-40 bg-gradient-to-b from-white to-[#edf7f6]/30">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24 2xl:mb-28">
               <div className="inline-flex items-center px-3 sm:px-4 xl:px-5 py-1.5 sm:py-2 xl:py-2.5 bg-[#f98125]/10 rounded-full text-xs sm:text-sm xl:text-base font-medium text-[#f98125] mb-4 sm:mb-6 xl:mb-8">
