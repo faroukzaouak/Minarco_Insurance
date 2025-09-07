@@ -32,17 +32,9 @@ export function Hero() {
                 Our mission is simple: deliver peace of mind through reliable coverage that fits your unique needs and budget.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 xl:gap-6">
+            <div>
               <Button onClick={scrollToContact} size="lg" className="text-base sm:text-lg xl:text-xl px-6 sm:px-8 lg:px-10 xl:px-14 py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Get Your Quote Today
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-base sm:text-lg xl:text-xl px-6 sm:px-8 lg:px-10 xl:px-14 py-3 sm:py-4 xl:py-5 bg-white/90 backdrop-blur-sm border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white hover:border-[#218eec] shadow-lg transition-all duration-300"
-              >
-                <Phone className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 mr-2 xl:mr-3" />
-                <span className="hidden sm:inline">Call </span>(832) 476-9999
               </Button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 xl:gap-8 pt-6 sm:pt-8 xl:pt-12">
