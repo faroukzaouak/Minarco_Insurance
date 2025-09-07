@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Shield, Users, Award } from "lucide-react"
 import Image from "next/image"
@@ -24,6 +26,16 @@ const services = [
 ]
 
 export function Services() {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   return (
     <section id="services" className="py-16 sm:py-20 md:py-24 lg:py-32 xl:py-40 bg-gradient-to-b from-[#edf7f6]/50 to-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
@@ -114,6 +126,7 @@ export function Services() {
             </p>
             <Button 
               size="lg" 
+              onClick={scrollToContact}
               className="text-lg sm:text-xl xl:text-2xl px-10 sm:px-12 xl:px-16 py-4 sm:py-5 xl:py-6 bg-gradient-to-r from-[#218eec] to-[#5b84c4] hover:from-[#1a7bc4] hover:to-[#4d73a8] text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-2xl"
             >
               Get Your Free Quote
