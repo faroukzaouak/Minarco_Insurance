@@ -26,12 +26,12 @@ export function Header() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-6">
               <div className="flex items-center text-xs sm:text-sm">
                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-                <span className="truncate">11959 Katy Fwy Ste 500, Houston TX 77079</span>
+                <span className="truncate">16365 Park Ten Pl Ste 350, Houston, TX 77084</span>
               </div>
               <div className="hidden md:flex items-center text-xs sm:text-sm">
                 <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                <a href="mailto:contact@minarcoinsurance.com" className="hover:underline truncate">
-                  contact@minarcoinsurance.com
+                <a href="mailto:info@minarcoins.com" className="hover:underline truncate">
+                  info@minarcoins.com
                 </a>
               </div>
             </div>

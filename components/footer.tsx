@@ -52,15 +52,15 @@ export function Footer() {
               </div>
               <div className="flex items-center text-white/80 hover:text-white transition-colors text-sm sm:text-base xl:text-lg 2xl:text-xl">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 mr-2 sm:mr-3 xl:mr-4 text-[#218eec] flex-shrink-0" />
-                <a href="mailto:contact@minarcoinsurance.com" className="hover:text-[#218eec] transition-colors break-all">
-                  contact@minarcoinsurance.com
+                <a href="mailto:info@minarcoins.com" className="hover:text-[#218eec] transition-colors break-all">
+                  info@minarcoins.com
                 </a>
               </div>
               <div className="flex items-start text-white/80 text-sm sm:text-base xl:text-lg 2xl:text-xl">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 mr-2 sm:mr-3 xl:mr-4 mt-1 text-[#f19953] flex-shrink-0" />
                 <div>
-                  <p>11959 Katy Fwy Ste 500</p>
-                  <p>Houston, TX 77079</p>
+                  <p>16365 Park Ten Pl Ste 350</p>
+                  <p>Houston, TX 77084</p>
                 </div>
               </div>
             </div>

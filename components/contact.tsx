@@ -45,10 +45,10 @@ export function Contact() {
                 <div className="ml-3 sm:ml-4 xl:ml-6">
                   <p className="font-semibold text-sm sm:text-base xl:text-lg 2xl:text-xl text-[#11224d]">Email</p>
                   <a
-                    href="mailto:contact@minarcoinsurance.com"
+                    href="mailto:info@minarcoins.com"
                     className="text-[#193a6f] hover:text-[#218eec] transition-colors text-sm sm:text-base xl:text-lg break-all"
                   >
-                    contact@minarcoinsurance.com
+                    info@minarcoins.com
                   </a>
                 </div>
               </div>
@@ -60,9 +60,9 @@ export function Contact() {
                 <div className="ml-3 sm:ml-4 xl:ml-6">
                   <p className="font-semibold text-sm sm:text-base xl:text-lg 2xl:text-xl text-[#11224d]">Address</p>
                   <p className="text-[#193a6f] text-sm sm:text-base xl:text-lg">
-                    11959 Katy Fwy Ste 500
+                    16365 Park Ten Pl Ste 350
                     <br />
-                    Houston, TX 77079
+                    Houston, TX 77084
                   </p>
                 </div>
               </div>
@@ -74,9 +74,9 @@ export function Contact() {
                 <div className="ml-3 sm:ml-4 xl:ml-6">
                   <p className="font-semibold text-sm sm:text-base xl:text-lg 2xl:text-xl text-[#11224d]">Business Hours</p>
                   <p className="text-[#193a6f] text-sm sm:text-base xl:text-lg">
-                    Monday - Friday: 8 AM - 9 PM
+                    Monday - Friday: 9 AM - 5 PM
                     <br />
-                    Saturday: 8 AM - 12 PM
+                    Saturday: Closed
                   </p>
                 </div>
               </div>
