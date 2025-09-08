@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { EMAIL_CONFIG } from '@/lib/email-config'
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,8 +46,8 @@ export async function POST(req: NextRequest) {
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'fzouak24@gmail.com',
-      subject: `New Quote Request from ${firstName} ${lastName}`,
+      to: EMAIL_CONFIG.recipient,
+      subject: `${EMAIL_CONFIG.subject} - ${firstName} ${lastName}`,
       html: `
         <h2>New Quote Request</h2>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>

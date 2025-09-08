@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { EMAIL_CONFIG } from "@/lib/email-config"
 
 export function Contact() {
   const router = useRouter()
@@ -52,23 +53,28 @@ export function Contact() {
     setSubmitMessage("")
 
     try {
-      // Using FormSubmit.co - a free form submission service
+      // Using FormSubmit.co AJAX endpoint to avoid CORS issues
       const submitData = new FormData()
       submitData.append('name', `${formData.firstName} ${formData.lastName}`)
       submitData.append('email', formData.email)
       submitData.append('phone', formData.phone)
       submitData.append('insurance_type', formData.insuranceType)
       submitData.append('message', formData.message)
-      submitData.append('_subject', 'New Quote Request from Minarco Insurance Website')
-      submitData.append('_next', window.location.href)
-      submitData.append('_captcha', 'false')
+      submitData.append('_subject', EMAIL_CONFIG.subject)
+      submitData.append('_captcha', EMAIL_CONFIG.formSubmit.captcha.toString())
+      submitData.append('_template', EMAIL_CONFIG.formSubmit.template)
 
-      const response = await fetch('https://formsubmit.co/fzouak24@gmail.com', {
+      const response = await fetch(`https://formsubmit.co/ajax/${EMAIL_CONFIG.recipient}`, {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
         body: submitData
       })
 
-      if (response.ok) {
+      const result = await response.json()
+
+      if (response.ok && result.success) {
         setSubmitMessage("Thank you! Your quote request has been sent successfully. We'll get back to you soon!")
         setFormData({
           firstName: "",
@@ -82,6 +88,7 @@ export function Contact() {
         setSubmitMessage("Sorry, there was an error sending your request. Please try again or call us directly.")
       }
     } catch (error) {
+      console.error('Form submission error:', error)
       setSubmitMessage("Sorry, there was an error sending your request. Please try again or call us directly.")
     } finally {
       setIsSubmitting(false)
