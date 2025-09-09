@@ -39,36 +39,59 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
 
   // Validation functions
   const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return emailRegex.test(email.trim())
   }
 
   const validatePhone = (phone: string): boolean => {
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/
-    const cleanPhone = phone.replace(/[\s\-\(\)]/g, '')
-    return cleanPhone.length >= 10 && phoneRegex.test(cleanPhone)
+    // Remove all non-digit characters
+    const digitsOnly = phone.replace(/\D/g, '')
+    // Must be 10-15 digits
+    return digitsOnly.length >= 10 && digitsOnly.length <= 15
+  }
+
+  const formatPhoneNumber = (value: string): string => {
+    // Remove all non-digit characters
+    const digitsOnly = value.replace(/\D/g, '')
+    
+    // Format as (XXX) XXX-XXXX for US numbers
+    if (digitsOnly.length <= 3) {
+      return digitsOnly
+    } else if (digitsOnly.length <= 6) {
+      return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3)}`
+    } else if (digitsOnly.length <= 10) {
+      return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3, 6)}-${digitsOnly.slice(6)}`
+    } else {
+      // For numbers longer than 10 digits, include country code
+      return `+${digitsOnly.slice(0, digitsOnly.length - 10)} (${digitsOnly.slice(-10, -7)}) ${digitsOnly.slice(-7, -4)}-${digitsOnly.slice(-4)}`
+    }
   }
 
   const validateField = (name: string, value: string): string => {
     switch (name) {
       case 'firstName':
         if (!value.trim()) return 'First name is required'
-        if (value.trim().length < 2) return 'First name must be at least 2 characters'
+        if (value.trim().length < 2) return 'First name must be at least 2 characters long'
+        if (!/^[a-zA-Z\s'-]+$/.test(value.trim())) return 'First name can only contain letters, spaces, hyphens, and apostrophes'
         return ''
       case 'lastName':
         if (!value.trim()) return 'Last name is required'
-        if (value.trim().length < 2) return 'Last name must be at least 2 characters'
+        if (value.trim().length < 2) return 'Last name must be at least 2 characters long'
+        if (!/^[a-zA-Z\s'-]+$/.test(value.trim())) return 'Last name can only contain letters, spaces, hyphens, and apostrophes'
         return ''
       case 'email':
-        if (!value.trim()) return 'Email is required'
-        if (!validateEmail(value)) return 'Please enter a valid email address'
+        if (!value.trim()) return 'Email address is required'
+        if (!validateEmail(value)) return 'Please enter a valid email address (e.g., example@email.com)'
         return ''
       case 'phone':
         if (!value.trim()) return 'Phone number is required'
+        const digitsOnly = value.replace(/\D/g, '')
+        if (digitsOnly.length < 10) return 'Phone number must be at least 10 digits'
+        if (digitsOnly.length > 15) return 'Phone number cannot exceed 15 digits'
         if (!validatePhone(value)) return 'Please enter a valid phone number'
         return ''
       case 'insuranceType':
-        if (!value) return 'Please select an insurance type'
+        if (!value) return 'Please select an insurance type from the dropdown'
         return ''
       default:
         return ''
@@ -77,9 +100,28 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    
+    let processedValue = value
+
+    // Special handling for phone number - only allow digits and format automatically
+    if (name === 'phone') {
+      // Only allow digits, spaces, parentheses, and hyphens during typing
+      if (!/^[\d\s\(\)\-\+]*$/.test(value)) {
+        return // Don't update if invalid characters
+      }
+      processedValue = formatPhoneNumber(value)
+    }
+
+    // Special handling for names - only allow letters, spaces, hyphens, and apostrophes
+    if (name === 'firstName' || name === 'lastName') {
+      if (value && !/^[a-zA-Z\s'-]*$/.test(value)) {
+        return // Don't update if invalid characters
+      }
+    }
+
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: processedValue
     }))
 
     // Clear error when user starts typing
@@ -111,19 +153,76 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
     let isValid = true
+    const missingFields: string[] = []
 
-    // Validate all required fields
-    Object.keys(formData).forEach(key => {
-      if (key !== 'message') { // message is optional
-        const error = validateField(key, formData[key as keyof typeof formData])
-        if (error) {
-          newErrors[key as keyof FormErrors] = error
-          isValid = false
+    // Check for missing required fields first
+    if (!formData.firstName.trim()) {
+      missingFields.push('First Name')
+      newErrors.firstName = 'First name is required'
+      isValid = false
+    }
+    
+    if (!formData.lastName.trim()) {
+      missingFields.push('Last Name')
+      newErrors.lastName = 'Last name is required'
+      isValid = false
+    }
+    
+    if (!formData.email.trim()) {
+      missingFields.push('Email Address')
+      newErrors.email = 'Email address is required'
+      isValid = false
+    }
+    
+    if (!formData.phone.trim()) {
+      missingFields.push('Phone Number')
+      newErrors.phone = 'Phone number is required'
+      isValid = false
+    }
+    
+    if (!formData.insuranceType) {
+      missingFields.push('Insurance Type')
+      newErrors.insuranceType = 'Please select an insurance type'
+      isValid = false
+    }
+
+    // If fields are missing, show a summary error
+    if (missingFields.length > 0) {
+      const missingFieldsText = missingFields.length === 1 
+        ? `${missingFields[0]} is required` 
+        : `The following fields are required: ${missingFields.join(', ')}`
+      
+      setSubmitMessage(`Please complete all required fields. ${missingFieldsText}.`)
+      setSubmitStatus("error")
+    } else {
+      // Validate field formats if all fields are present
+      Object.keys(formData).forEach(key => {
+        if (key !== 'message') { // message is optional
+          const error = validateField(key, formData[key as keyof typeof formData])
+          if (error) {
+            newErrors[key as keyof FormErrors] = error
+            isValid = false
+          }
         }
+      })
+
+      // If there are format errors, show format-specific message
+      if (!isValid) {
+        setSubmitMessage("Please fix the errors highlighted in red below.")
+        setSubmitStatus("error")
       }
-    })
+    }
 
     setErrors(newErrors)
+    setTouched({
+      firstName: true,
+      lastName: true,
+      email: true,
+      phone: true,
+      insuranceType: true,
+      message: true
+    })
+    
     return isValid
   }
 
@@ -270,11 +369,12 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
               value={formData.email}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              placeholder="Email Address *" 
+              placeholder="Email Address * (e.g., john@example.com)" 
+              autoComplete="email"
               className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 rounded-lg xl:rounded-xl transition-colors ${
                 errors.email 
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                  : touched.email && !errors.email
+                  : touched.email && !errors.email && formData.email
                   ? 'border-green-300 focus:border-green-500 focus:ring-green-500'
                   : 'border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125]'
               }`}
@@ -283,6 +383,12 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
               <div className="flex items-center gap-1 text-red-600 text-xs">
                 <AlertCircle className="h-3 w-3" />
                 <span>{errors.email}</span>
+              </div>
+            )}
+            {touched.email && !errors.email && formData.email && (
+              <div className="flex items-center gap-1 text-green-600 text-xs">
+                <CheckCircle className="h-3 w-3" />
+                <span>Valid email address</span>
               </div>
             )}
           </div>
@@ -295,6 +401,9 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
               onChange={handleInputChange}
               onBlur={handleBlur}
               placeholder="Phone Number * (e.g., 832-476-9999)" 
+              maxLength={18} // Formatted phone number max length
+              inputMode="numeric"
+              autoComplete="tel"
               className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 rounded-lg xl:rounded-xl transition-colors ${
                 errors.phone 
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
@@ -307,6 +416,12 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
               <div className="flex items-center gap-1 text-red-600 text-xs">
                 <AlertCircle className="h-3 w-3" />
                 <span>{errors.phone}</span>
+              </div>
+            )}
+            {touched.phone && !errors.phone && formData.phone && (
+              <div className="flex items-center gap-1 text-green-600 text-xs">
+                <CheckCircle className="h-3 w-3" />
+                <span>Valid phone number</span>
               </div>
             )}
           </div>
