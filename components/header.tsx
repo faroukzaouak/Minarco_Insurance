@@ -9,15 +9,14 @@ import { usePathname } from "next/navigation"
 const insuranceServices = [
   { name: "Auto Insurance", href: "/services/auto" },
   { name: "Home Insurance", href: "/services/home" },
-  { name: "Life Insurance", href: "/services/life" },
   { name: "Commercial Insurance", href: "/services/commercial" },
-  { name: "Health Insurance", href: "/services/health" },
-  { name: "Renters Insurance", href: "/services/renters" },
+  { name: "Trucking Insurance", href: "/services/trucking" },
 ]
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
   const pathname = usePathname()
 
   const handleGetQuote = () => {
@@ -157,34 +156,70 @@ export function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
-              <Link href="/" className="text-foreground hover:text-primary transition-colors">
+              <Link 
+                href="/" 
+                className="text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Home
               </Link>
-              <Link href="/about" className="text-foreground hover:text-primary transition-colors">
+              <Link 
+                href="/about" 
+                className="text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 About
               </Link>
+              
+              {/* Mobile Services Dropdown */}
               <div className="space-y-2">
-                <div className="text-foreground font-medium">Services</div>
-                <div className="pl-4 space-y-2">
-                  {insuranceServices.map((service) => (
-                    <Link
-                      key={service.name}
-                      href={service.href}
-                      className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {service.name}
-                    </Link>
-                  ))}
+                <button 
+                  className="flex items-center justify-between w-full text-foreground font-medium"
+                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                >
+                  Services
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${isMobileServicesOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="pl-4 space-y-3 pt-2">
+                    {insuranceServices.map((service) => (
+                      <Link
+                        key={service.name}
+                        href={service.href}
+                        className="block text-sm text-muted-foreground hover:text-primary transition-colors py-1"
+                        onClick={() => {
+                          setIsMenuOpen(false)
+                          setIsMobileServicesOpen(false)
+                        }}
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
+              
+              <Link 
+                href="/contact" 
+                className="text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Contact
               </Link>
-              <a href="tel:8324769999" className="flex items-center text-sm text-foreground hover:text-primary">
+              <a 
+                href="tel:8324769999" 
+                className="flex items-center text-sm text-foreground hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <Phone className="h-4 w-4 mr-2" />
                 (832) 476-9999
               </a>
-              <Button onClick={handleGetQuote} className="w-fit bg-[#f19953] hover:bg-[#e08843] text-white">Get Quote</Button>
+              <Button 
+                onClick={handleGetQuote} 
+                className="w-fit bg-[#f19953] hover:bg-[#e08843] text-white"
+              >
+                Get Quote
+              </Button>
             </nav>
           </div>
         )}
