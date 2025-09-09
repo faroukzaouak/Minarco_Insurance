@@ -6,11 +6,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { CheckCircle, Shield, Users, Award, Clock, Heart, Target, Star, Phone, Mail, MapPin } from "lucide-react"
+import { CheckCircle, Shield, Users, Award, Clock, Heart, Target, Star, Phone, Mail, MapPin, AlertCircle } from "lucide-react"
 import MainContentTransition from "@/components/main-content-transition"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { EMAIL_CONFIG } from "@/lib/email-config"
+
+interface FormErrors {
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  insuranceType?: string
+  message?: string
+}
 
 const stats = [
   { number: "68+", label: "Satisfied Clients" },
@@ -46,6 +55,9 @@ export default function AboutPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState("")
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | ''>("")
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -54,6 +66,67 @@ export default function AboutPage() {
     insuranceType: "",
     message: ""
   })
+
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return emailRegex.test(email.trim())
+  }
+
+  const validatePhone = (phone: string): boolean => {
+    // Remove all non-digit characters
+    const digitsOnly = phone.replace(/\D/g, '')
+    // Must be 10-15 digits
+    return digitsOnly.length >= 10 && digitsOnly.length <= 15
+  }
+
+  const formatPhoneNumber = (value: string): string => {
+    // Remove all non-digit characters
+    const digitsOnly = value.replace(/\D/g, '')
+    
+    // Format as (XXX) XXX-XXXX for US numbers
+    if (digitsOnly.length <= 3) {
+      return digitsOnly
+    } else if (digitsOnly.length <= 6) {
+      return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3)}`
+    } else if (digitsOnly.length <= 10) {
+      return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3, 6)}-${digitsOnly.slice(6)}`
+    } else {
+      // For numbers longer than 10 digits, include country code
+      return `+${digitsOnly.slice(0, digitsOnly.length - 10)} (${digitsOnly.slice(-10, -7)}) ${digitsOnly.slice(-7, -4)}-${digitsOnly.slice(-4)}`
+    }
+  }
+
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) return 'First name is required'
+        if (value.trim().length < 2) return 'First name must be at least 2 characters long'
+        if (!/^[a-zA-Z\s'-]+$/.test(value.trim())) return 'First name can only contain letters, spaces, hyphens, and apostrophes'
+        return ''
+      case 'lastName':
+        if (!value.trim()) return 'Last name is required'
+        if (value.trim().length < 2) return 'Last name must be at least 2 characters long'
+        if (!/^[a-zA-Z\s'-]+$/.test(value.trim())) return 'Last name can only contain letters, spaces, hyphens, and apostrophes'
+        return ''
+      case 'email':
+        if (!value.trim()) return 'Email address is required'
+        if (!validateEmail(value)) return 'Please enter a valid email address (e.g., example@email.com)'
+        return ''
+      case 'phone':
+        if (!value.trim()) return 'Phone number is required'
+        const digitsOnly = value.replace(/\D/g, '')
+        if (digitsOnly.length < 10) return 'Phone number must be at least 10 digits'
+        if (digitsOnly.length > 15) return 'Phone number cannot exceed 15 digits'
+        if (!validatePhone(value)) return 'Please enter a valid phone number'
+        return ''
+      case 'insuranceType':
+        if (!value) return 'Please select an insurance type from the dropdown'
+        return ''
+      default:
+        return ''
+    }
+  }
 
   // Mapping service names to their routes
   const serviceRoutes: { [key: string]: string } = {
@@ -84,9 +157,58 @@ export default function AboutPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    let processedValue = value
+
+    // Handle phone number formatting and restrictions
+    if (name === 'phone') {
+      processedValue = formatPhoneNumber(value)
+    }
+
+    // Restrict first name and last name to letters, spaces, hyphens, and apostrophes
+    if (name === 'firstName' || name === 'lastName') {
+      // Only allow letters, spaces, hyphens, and apostrophes
+      processedValue = value.replace(/[^a-zA-Z\s'-]/g, '')
+    }
+
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: processedValue
+    }))
+
+    // Mark field as touched
+    setTouched(prev => ({
+      ...prev,
+      [name]: true
+    }))
+
+    // Validate field and update errors
+    const error = validateField(name, processedValue)
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }))
+
+    // Clear submit messages when user starts typing
+    if (submitMessage) {
+      setSubmitMessage("")
+      setSubmitStatus("")
+    }
+  }
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    
+    // Mark field as touched
+    setTouched(prev => ({
+      ...prev,
+      [name]: true
+    }))
+
+    // Validate field
+    const error = validateField(name, value)
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
     }))
   }
 
@@ -94,6 +216,36 @@ export default function AboutPage() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitMessage("")
+    setSubmitStatus("")
+
+    // Mark all fields as touched for validation display
+    const allFields = ['firstName', 'lastName', 'email', 'phone', 'insuranceType']
+    const touchedFields = allFields.reduce((acc, field) => ({
+      ...acc,
+      [field]: true
+    }), {})
+    setTouched(touchedFields)
+
+    // Validate all fields
+    const validationErrors: FormErrors = {}
+    allFields.forEach(field => {
+      const error = validateField(field, formData[field as keyof typeof formData])
+      if (error) {
+        validationErrors[field as keyof FormErrors] = error
+      }
+    })
+
+    // Check if there are any validation errors
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      setSubmitMessage("Please fix the errors above before submitting")
+      setSubmitStatus("error")
+      setIsSubmitting(false)
+      return
+    }
+
+    // Clear any previous errors
+    setErrors({})
 
     try {
       // Using FormSubmit.co AJAX endpoint to avoid CORS issues
@@ -119,6 +271,7 @@ export default function AboutPage() {
 
       if (response.ok && result.success) {
         setSubmitMessage("Thank you! Your quote request has been sent successfully. We'll get back to you soon!")
+        setSubmitStatus("success")
         setFormData({
           firstName: "",
           lastName: "",
@@ -127,12 +280,16 @@ export default function AboutPage() {
           insuranceType: "",
           message: ""
         })
+        setTouched({})
+        setErrors({})
       } else {
         setSubmitMessage("Sorry, there was an error sending your request. Please try again or call us directly.")
+        setSubmitStatus("error")
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitMessage("Sorry, there was an error sending your request. Please try again or call us directly.")
+      setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
     }
@@ -375,60 +532,124 @@ export default function AboutPage() {
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 xl:space-y-8">
                     {submitMessage && (
-                      <div className={`p-4 rounded-lg ${submitMessage.includes('Thank you') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      <div className={`p-4 rounded-lg flex items-center gap-2 ${
+                        submitStatus === 'success' 
+                          ? 'bg-green-50 text-green-800 border border-green-200' 
+                          : 'bg-red-50 text-red-800 border border-red-200'
+                      }`}>
+                        {submitStatus === 'success' ? (
+                          <CheckCircle className="h-5 w-5 text-green-600" />
+                        ) : (
+                          <AlertCircle className="h-5 w-5 text-red-600" />
+                        )}
                         {submitMessage}
                       </div>
                     )}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:gap-6">
-                      <Input 
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        placeholder="First Name" 
-                        required
-                        className="h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl" 
-                      />
-                      <Input 
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        placeholder="Last Name" 
-                        required
-                        className="h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl" 
-                      />
+                      <div>
+                        <Input 
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          onBlur={handleBlur}
+                          placeholder="First Name" 
+                          required
+                          className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl ${
+                            touched.firstName && errors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''
+                          }`}
+                        />
+                        {touched.firstName && errors.firstName && (
+                          <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {errors.firstName}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <Input 
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          onBlur={handleBlur}
+                          placeholder="Last Name" 
+                          required
+                          className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl ${
+                            touched.lastName && errors.lastName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''
+                          }`}
+                        />
+                        {touched.lastName && errors.lastName && (
+                          <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {errors.lastName}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <Input 
-                      name="email"
-                      type="email" 
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address" 
-                      required
-                      className="h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl" 
-                    />
-                    <Input 
-                      name="phone"
-                      type="tel" 
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Phone Number" 
-                      required
-                      className="h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl" 
-                    />
-                    <select 
-                      name="insuranceType"
-                      value={formData.insuranceType}
-                      onChange={handleInputChange}
-                      className="w-full h-10 sm:h-12 xl:h-14 2xl:h-16 px-3 sm:px-4 xl:px-5 py-2.5 sm:py-3 xl:py-4 border border-[#5b84c4]/30 bg-white rounded-lg xl:rounded-xl focus:border-[#f98125] focus:ring-2 focus:ring-[#f98125]/20 transition-all text-sm sm:text-base xl:text-lg"
-                    >
-                      <option value="">Select Insurance Type</option>
-                      <option value="auto">Auto Insurance</option>
-                      <option value="home">Homeowners Insurance</option>
-                      <option value="business">Business Insurance</option>
-                      <option value="commercial">Commercial Auto Insurance</option>
-                      <option value="life">Life Insurance</option>
-                      <option value="renters">Renters Insurance</option>
-                    </select>
+                    <div>
+                      <Input 
+                        name="email"
+                        type="email" 
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        placeholder="Email Address" 
+                        required
+                        className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl ${
+                          touched.email && errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''
+                        }`}
+                      />
+                      {touched.email && errors.email && (
+                        <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                          <AlertCircle className="h-4 w-4" />
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Input 
+                        name="phone"
+                        type="tel" 
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        placeholder="Phone Number" 
+                        required
+                        className={`h-10 sm:h-12 xl:h-14 2xl:h-16 text-sm sm:text-base xl:text-lg px-3 xl:px-4 2xl:px-5 border-[#5b84c4]/30 focus:border-[#f98125] focus:ring-[#f98125] rounded-lg xl:rounded-xl ${
+                          touched.phone && errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''
+                        }`}
+                      />
+                      {touched.phone && errors.phone && (
+                        <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                          <AlertCircle className="h-4 w-4" />
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <select 
+                        name="insuranceType"
+                        value={formData.insuranceType}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={`w-full h-10 sm:h-12 xl:h-14 2xl:h-16 px-3 sm:px-4 xl:px-5 py-2.5 sm:py-3 xl:py-4 border border-[#5b84c4]/30 bg-white rounded-lg xl:rounded-xl focus:border-[#f98125] focus:ring-2 focus:ring-[#f98125]/20 transition-all text-sm sm:text-base xl:text-lg ${
+                          touched.insuranceType && errors.insuranceType ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''
+                        }`}
+                      >
+                        <option value="">Select Insurance Type</option>
+                        <option value="auto">Auto Insurance</option>
+                        <option value="home">Homeowners Insurance</option>
+                        <option value="business">Business Insurance</option>
+                        <option value="commercial">Commercial Auto Insurance</option>
+                        <option value="life">Life Insurance</option>
+                        <option value="renters">Renters Insurance</option>
+                      </select>
+                      {touched.insuranceType && errors.insuranceType && (
+                        <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                          <AlertCircle className="h-4 w-4" />
+                          {errors.insuranceType}
+                        </p>
+                      )}
+                    </div>
                     <Textarea 
                       name="message"
                       value={formData.message}
