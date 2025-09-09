@@ -1,16 +1,4 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, ExternalLink } from "lucide-react"
-
-// Custom TikTok Icon Component
-const TikTokIcon = ({ className }: { className?: string }) => (
-  <svg 
-    className={className} 
-    viewBox="0 0 24 24" 
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.929-1.342-2.086-1.342-3.338h-3.021v11.906c0 .968-.355 1.854-.94 2.534a3.99 3.99 0 0 1-2.844 1.188c-2.214 0-4.01-1.795-4.01-4.009s1.796-4.009 4.01-4.009c.41 0 .805.062 1.175.177v-3.104a7.041 7.041 0 0 0-1.175-.1C4.498 5.583 0 10.082 0 15.677s4.498 10.094 10.095 10.094c5.597 0 10.095-4.499 10.095-10.094V9.743a9.186 9.186 0 0 0 5.31 1.687V8.408c-2.328 0-4.379-1.399-5.179-3.406z"/>
-  </svg>
-)
+import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react"
 
 export function Footer() {
   return (
@@ -46,9 +34,13 @@ export function Footer() {
                 href="https://www.tiktok.com/@minarco.ins?_t=ZT-8za4Jkt9jUN&_r=1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 xl:p-3 2xl:p-4 bg-[#218eec] rounded-full hover:bg-[#1a7bc4] transition-colors cursor-pointer"
+                className="p-2 xl:p-3 2xl:p-4 bg-[#218eec] rounded-full hover:bg-[#1a7bc4] transition-colors cursor-pointer flex items-center justify-center"
               >
-                <TikTokIcon className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 2xl:h-7 2xl:w-7" />
+                <img 
+                  src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" 
+                  alt="TikTok"
+                  className="h-4 w-4 sm:h-5 sm:w-5 xl:h-6 xl:w-6 2xl:h-7 2xl:w-7 filter brightness-0 invert"
+                />
               </a>
             </div>
           </div>
