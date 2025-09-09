@@ -8,6 +8,7 @@ import { Phone, Mail, MapPin, Clock, AlertCircle, CheckCircle } from "lucide-rea
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { EMAIL_CONFIG } from "@/lib/email-config"
+import { BusinessHoursDisplay } from "@/components/business-hours-display"
 
 interface FormErrors {
   firstName?: string
@@ -318,14 +319,11 @@ export function Contact() {
                 <div className="p-2 sm:p-3 xl:p-4 bg-[#5b84c4]/10 rounded-full flex-shrink-0">
                   <Clock className="h-5 w-5 sm:h-6 sm:w-6 xl:h-7 xl:w-7 2xl:h-8 2xl:w-8 text-[#5b84c4]" />
                 </div>
-                <div className="ml-3 sm:ml-4 xl:ml-6">
-                  <p className="font-semibold text-sm sm:text-base xl:text-lg 2xl:text-xl text-[#11224d]">Business Hours</p>
-                  <p className="text-[#193a6f] text-sm sm:text-base xl:text-lg">
-                    Monday - Friday: 9 AM - 5 PM
-                    <br />
-                    Saturday: Closed
-                  </p>
-                </div>
+                <BusinessHoursDisplay 
+                  className="ml-3 sm:ml-4 xl:ml-6"
+                  showIcon={false}
+                  textSize="text-sm sm:text-base xl:text-lg 2xl:text-xl"
+                />
               </div>
             </CardContent>
           </Card>

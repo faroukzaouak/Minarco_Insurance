@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock, Shield, Users, Award, CheckCircle, Star, MessageCircle, HeadphonesIcon } from "lucide-react"
 import MainContentTransition from "@/components/main-content-transition"
+import { BusinessHoursDisplay } from "@/components/business-hours-display"
 
 export default function ContactPage() {
   return (
@@ -94,13 +95,11 @@ export default function ContactPage() {
                     <div className="p-3 bg-secondary/10 rounded-full flex-shrink-0">
                       <Clock className="h-6 w-6 text-secondary" />
                     </div>
-                    <div className="ml-4">
-                      <p className="font-semibold text-foreground">Business Hours</p>
-                      <p className="text-muted-foreground">
-                        Monday - Friday: 9 AM - 5 PM<br />
-                        Saturday: Closed
-                      </p>
-                    </div>
+                    <BusinessHoursDisplay 
+                      className="ml-4"
+                      showIcon={false}
+                      textSize="text-base"
+                    />
                   </div>
                 </CardContent>
               </Card>
