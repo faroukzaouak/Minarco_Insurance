@@ -474,7 +474,7 @@ export function QuoteForm({ insuranceType = "", title = "Request a Quote" }: Quo
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#e08843] hover:to-[#d97a3c] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <div className="flex items-center justify-center gap-2">

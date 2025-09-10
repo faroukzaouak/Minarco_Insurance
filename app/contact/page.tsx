@@ -27,7 +27,7 @@ export default function ContactPage() {
                 Let's Protect What Matters Most
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Ready to secure your future? Our Houston insurance experts are here to help you find the perfect coverage. 
+                Ready to secure your future? Our insurance experts are here to help you find the perfect coverage. 
                 Get personalized quotes, expert advice, and unbeatable service.
               </p>
             </div>

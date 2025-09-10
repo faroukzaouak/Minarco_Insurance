@@ -15,7 +15,7 @@ export function Hero() {
   }
 
   return (
-    <section className="bg-gradient-to-br from-[#5b84c4]/10 via-white to-[#f98125]/10 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32">
+    <section className="bg-gradient-to-br from-[#5b84c4]/10 via-white to-[#f98125]/10 py-12 sm:py-16 lg:py-20">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <div className="grid lg:grid-cols-2 xl:grid-cols-5 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-center">
           <div className="space-y-6 sm:space-y-8 xl:space-y-10 order-2 lg:order-1 xl:col-span-3">
@@ -33,36 +33,38 @@ export function Hero() {
               </p>
             </div>
             <div>
-              <Button onClick={scrollToContact} size="lg" className="text-base sm:text-lg xl:text-xl px-6 sm:px-8 lg:px-10 xl:px-14 py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button onClick={scrollToContact} size="lg" className="text-base sm:text-lg xl:text-xl px-6 sm:px-8 lg:px-10 xl:px-14 py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#e08843] hover:to-[#d97a3c] text-white shadow-lg hover:shadow-xl transition-all duration-300">
                 Get Your Quote Today
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 xl:gap-8 pt-6 sm:pt-8 xl:pt-12">
-              <div className="flex items-center space-x-3 xl:space-x-4 p-3 sm:p-4 xl:p-6 bg-white/60 backdrop-blur-sm rounded-xl xl:rounded-2xl shadow-sm">
-                <div className="p-1.5 sm:p-2 xl:p-3 bg-[#f98125]/10 rounded-lg xl:rounded-xl">
-                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 xl:h-8 xl:w-8 text-[#f98125]" />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 pt-8 sm:pt-10 max-w-5xl">
+              <div className="flex items-center space-x-4 p-5 sm:p-6 bg-white/75 backdrop-blur-sm rounded-xl shadow-md border border-white/30 hover:bg-white/85 transition-all duration-300">
+                <div className="p-3 bg-gradient-to-br from-[#f98125]/15 to-[#f98125]/25 rounded-lg flex-shrink-0">
+                  <Shield className="h-6 w-6 sm:h-7 sm:w-7 text-[#f98125]" />
                 </div>
-                <div>
-                  <div className="font-semibold text-sm sm:text-base xl:text-lg text-[#11224d]">2+ Years</div>
-                  <div className="text-xs sm:text-sm xl:text-base text-[#193a6f]">Experience</div>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3 xl:space-x-4 p-3 sm:p-4 xl:p-6 bg-white/60 backdrop-blur-sm rounded-xl xl:rounded-2xl shadow-sm">
-                <div className="p-1.5 sm:p-2 xl:p-3 bg-[#218eec]/10 rounded-lg xl:rounded-xl">
-                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 xl:h-8 xl:w-8 text-[#218eec]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-sm sm:text-base xl:text-lg text-[#11224d]">Fast & Easy</div>
-                  <div className="text-xs sm:text-sm xl:text-base text-[#193a6f]">Process</div>
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-2xl font-bold text-[#11224d] leading-tight">10+</div>
+                  <div className="text-sm sm:text-base font-medium text-[#193a6f] leading-tight">Years Experience</div>
                 </div>
               </div>
-              <div className="flex items-center space-x-3 xl:space-x-4 p-3 sm:p-4 xl:p-6 bg-white/60 backdrop-blur-sm rounded-xl xl:rounded-2xl shadow-sm">
-                <div className="p-1.5 sm:p-2 xl:p-3 bg-[#f19953]/10 rounded-lg xl:rounded-xl">
-                  <Users className="h-5 w-5 sm:h-6 sm:w-6 xl:h-8 xl:w-8 text-[#f19953]" />
+              
+              <div className="flex items-center space-x-4 p-5 sm:p-6 bg-white/75 backdrop-blur-sm rounded-xl shadow-md border border-white/30 hover:bg-white/85 transition-all duration-300">
+                <div className="p-3 bg-gradient-to-br from-[#218eec]/15 to-[#218eec]/25 rounded-lg flex-shrink-0">
+                  <Clock className="h-6 w-6 sm:h-7 sm:w-7 text-[#218eec]" />
                 </div>
-                <div>
-                  <div className="font-semibold text-sm sm:text-base xl:text-lg text-[#11224d]">68+</div>
-                  <div className="text-xs sm:text-sm xl:text-base text-[#193a6f]">Satisfied Clients</div>
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-2xl font-bold text-[#11224d] leading-tight">Fast</div>
+                  <div className="text-sm sm:text-base font-medium text-[#193a6f] leading-tight">Easy Process</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4 p-5 sm:p-6 bg-white/75 backdrop-blur-sm rounded-xl shadow-md border border-white/30 hover:bg-white/85 transition-all duration-300">
+                <div className="p-3 bg-gradient-to-br from-[#f19953]/15 to-[#f19953]/25 rounded-lg flex-shrink-0">
+                  <Users className="h-6 w-6 sm:h-7 sm:w-7 text-[#f19953]" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-2xl font-bold text-[#11224d] leading-tight">400+</div>
+                  <div className="text-sm sm:text-base font-medium text-[#193a6f] leading-tight">Satisfied Clients</div>
                 </div>
               </div>
             </div>

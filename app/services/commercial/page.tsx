@@ -20,9 +20,9 @@ const features = [
     description: "Competitive rates with customizable coverage options that protect your bottom line"
   },
   {
-    icon: Clock,
-    title: "Fast Claims Processing", 
-    description: "Quick claim resolution to minimize business interruption and get you back on track"
+    icon: Users,
+    title: "Expert Guidance", 
+    description: "Professional advice and personalized recommendations for your business coverage needs"
   },
   {
     icon: Shield,
@@ -45,7 +45,7 @@ const coverage = [
 const benefits = [
   "Industry-Specific Coverage",
   "Risk Management Consulting", 
-  "24/7 Claims Support",
+  "Expert Guidance",
   "Flexible Payment Terms",
   "Bundle Discounts Available",
   "Legal Defense Coverage",
@@ -111,7 +111,7 @@ export default function CommercialInsurancePage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Choose Our Commercial Insurance?</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Protecting your business requires expertise and understanding. Our commercial insurance solutions are designed for Houston businesses of all sizes.
+                Protecting your business requires expertise and understanding. Our commercial insurance solutions are designed for businesses of all sizes.
               </p>
             </div>
             
@@ -192,7 +192,7 @@ export default function CommercialInsurancePage() {
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Businesses Choose Us</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Businesses Choose Us</h2>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -229,7 +229,7 @@ export default function CommercialInsurancePage() {
             <Building className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Protect Your Business?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join hundreds of Houston businesses that trust us with their commercial insurance needs.
+              Join hundreds of businesses that trust us with their commercial insurance needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 

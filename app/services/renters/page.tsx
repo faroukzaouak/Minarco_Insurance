@@ -192,7 +192,7 @@ export default function RentersInsurancePage() {
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Renters Choose Us</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Renters Choose Us</h2>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -217,7 +217,7 @@ export default function RentersInsurancePage() {
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Local Expertise</h3>
-                <p className="text-muted-foreground">Understanding Houston's unique rental market and renter needs.</p>
+                <p className="text-muted-foreground">Understanding local rental market and renter needs.</p>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function RentersInsurancePage() {
             <Key className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Protect Your Belongings?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join thousands of Houston renters who protect their belongings with our affordable coverage.
+              Join thousands of renters who protect their belongings with our affordable coverage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 

@@ -254,7 +254,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 2xl:py-40 bg-gradient-to-b from-white to-[#edf7f6]/30">
+    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#edf7f6]/30">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24 2xl:mb-28">
           <div className="inline-flex items-center px-3 sm:px-4 xl:px-5 py-1.5 sm:py-2 xl:py-2.5 bg-[#f98125]/10 rounded-full text-xs sm:text-sm xl:text-base font-medium text-[#f98125] mb-4 sm:mb-6 xl:mb-8">
@@ -467,7 +467,7 @@ export function Contact() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#e08843] hover:to-[#d97a3c] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Get My Quote Now"}
                 </Button>
@@ -484,7 +484,7 @@ export function Contact() {
                 key={type}
                 variant="outline"
                 onClick={() => handleServiceClick(type)}
-                className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
+                className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white hover:border-[#1a7bc4] transition-all duration-300 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
               >
                 {type}
               </Button>

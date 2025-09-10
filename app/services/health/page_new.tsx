@@ -182,7 +182,7 @@ export default function HealthInsurancePage() {
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Families Choose Our Health Plans</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Families Choose Our Health Plans</h2>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -207,7 +207,7 @@ export default function HealthInsurancePage() {
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Local Knowledge</h3>
-                <p className="text-muted-foreground">Deep understanding of Houston healthcare networks and provider options.</p>
+                <p className="text-muted-foreground">Deep understanding of local healthcare networks and provider options.</p>
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function HealthInsurancePage() {
             <Heart className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Secure Your Health?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join thousands of Houston residents who trust us with their health insurance needs.
+              Join thousands of residents who trust us with their health insurance needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-primary hover:bg-white/90">

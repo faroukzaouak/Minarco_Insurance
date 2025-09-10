@@ -23,9 +23,9 @@ interface FormErrors {
 }
 
 const stats = [
-  { number: "68+", label: "Satisfied Clients" },
+  { number: "400+", label: "Satisfied Clients" },
   { number: "6", label: "Insurance Products" },
-  { number: "2+", label: "Years of Service" },
+  { number: "10+", label: "Years of Service" },
   { number: "99%", label: "Customer Satisfaction" },
 ]
 
@@ -309,7 +309,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               Founded on the belief that insurance should be simple, affordable, and tailored to your unique needs. 
-              We're not just an agency—we're your neighbors, committed to protecting Houston families.
+              We're not just an agency—we're your neighbors, committed to protecting families.
             </p>
           </div>
         </section>
@@ -337,11 +337,11 @@ export default function AboutPage() {
                 <div className="space-y-4 text-muted-foreground">
                   <p>
                     Minarco Insurance was born from a simple frustration: insurance was too complicated, 
-                    too expensive, and too impersonal. Sam Minkara started this agency in Houston with 
+                    too expensive, and too impersonal. Sam Minkara started this agency with 
                     a mission to change that experience entirely.
                   </p>
                   <p>
-                    What began as a small office has grown into a trusted partner for hundreds of Houston 
+                    What began as a small office has grown into a trusted partner for hundreds of 
                     families. We've maintained our core principle: treat every client like family, and 
                     provide insurance solutions that actually make sense.
                   </p>
@@ -356,7 +356,7 @@ export default function AboutPage() {
                 <div className="aspect-square bg-gradient-to-br from-primary/10 to-[#f98125]/10 rounded-2xl flex items-center justify-center">
                   <div className="text-center">
                     <Users className="h-24 w-24 text-primary mx-auto mb-4" />
-                    <p className="text-muted-foreground">Our Houston Office</p>
+                    <p className="text-muted-foreground">Our Office</p>
                     <p className="text-sm text-muted-foreground">(Image will be added later)</p>
                   </div>
                 </div>
@@ -420,7 +420,7 @@ export default function AboutPage() {
                   <Award className="h-8 w-8 text-secondary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Local Expertise</h3>
-                <p className="text-muted-foreground">Houston-based with deep understanding of local needs and regulations.</p>
+                <p className="text-muted-foreground">Local with deep understanding of Texas needs and regulations.</p>
               </div>
             </div>
           </div>
@@ -431,7 +431,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Get Protected?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join hundreds of Houston families who trust Minarco Insurance with their protection needs.
+              Join hundreds of families who trust Minarco Insurance with their protection needs.
             </p>
             <div className="flex justify-center">
               <Button 
@@ -659,7 +659,7 @@ export default function AboutPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full h-12 sm:h-14 xl:h-16 2xl:h-18 text-base sm:text-lg xl:text-xl 2xl:text-2xl py-3 sm:py-4 xl:py-5 bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#e08843] hover:to-[#d97a3c] text-white shadow-lg hover:shadow-xl xl:hover:shadow-2xl transition-all duration-300 rounded-lg xl:rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? "Sending..." : "Get My Quote Now"}
                     </Button>
@@ -676,7 +676,7 @@ export default function AboutPage() {
                     key={type}
                     variant="outline"
                     onClick={() => handleServiceClick(type)}
-                    className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
+                    className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white hover:border-[#1a7bc4] transition-all duration-300 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
                   >
                     {type}
                   </Button>

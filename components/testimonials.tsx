@@ -9,7 +9,7 @@ import { fetchGoogleReviews, fallbackReviews, ProcessedReview } from "@/lib/goog
 export function Testimonials() {
   const [reviews, setReviews] = useState<ProcessedReview[]>(fallbackReviews)
   const [averageRating, setAverageRating] = useState(5.0)
-  const [totalReviews, setTotalReviews] = useState(68)
+  const [totalReviews, setTotalReviews] = useState(400)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function Testimonials() {
   }, [])
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 2xl:py-40 bg-gradient-to-b from-[#edf7f6]/30 to-white">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-[#edf7f6]/30 to-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24 2xl:mb-28">
           <div className="inline-flex items-center px-3 sm:px-4 xl:px-5 py-1.5 sm:py-2 xl:py-2.5 bg-[#f98125]/10 rounded-full text-xs sm:text-sm xl:text-base font-medium text-[#f98125] mb-4 sm:mb-6 xl:mb-8">

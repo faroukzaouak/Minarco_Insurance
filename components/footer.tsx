@@ -10,8 +10,11 @@ export function Footer() {
               Minarco Insurance
             </h3>
             <p className="text-white/80 mb-4 sm:mb-6 xl:mb-8 text-base sm:text-lg xl:text-xl 2xl:text-2xl leading-relaxed max-w-md xl:max-w-lg 2xl:max-w-xl">
-              Your trusted insurance partner in Houston. We provide personalized coverage solutions for families, 
+              Your trusted insurance partner. We provide personalized coverage solutions for families, 
               businesses, and commercial fleets with honest service and competitive rates.
+            </p>
+            <p className="text-white/70 mb-4 sm:mb-6 xl:mb-8 text-sm sm:text-base xl:text-lg leading-relaxed max-w-md xl:max-w-lg 2xl:max-w-xl">
+              Sam has 10+ years experience and over 400 satisfied clients.
             </p>
             <div className="flex space-x-3 sm:space-x-4 xl:space-x-6">
               <a 

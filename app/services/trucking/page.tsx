@@ -21,8 +21,8 @@ const features = [
   },
   {
     icon: Clock,
-    title: "24/7 Claims Support", 
-    description: "Round-the-clock assistance when you need to file a claim or report an incident on the road"
+    title: "Expert Guidance", 
+    description: "Professional advice and personalized recommendations for your coverage needs"
   },
   {
     icon: Users,
@@ -48,6 +48,7 @@ const discounts = [
   "Owner-Operator Discount",
   "Safety Equipment Discount",
   "Driver Training Program",
+  "Telematics Discount",
   "Low Claims History Discount"
 ]
 
@@ -67,12 +68,12 @@ export default function TruckingInsurancePage() {
                   Trucking Insurance
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                  Keep Your Fleet Rolling in Houston
+                  Keep Your Fleet Rolling
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed">
                   Protect your trucking business with comprehensive commercial insurance coverage. 
                   From owner-operators to large fleets, we'll find the perfect policy that meets 
-                  DOT requirements and keeps your business moving on Texas highways.
+                  DOT requirements and keeps your business moving.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
@@ -180,14 +181,14 @@ export default function TruckingInsurancePage() {
           </div>
         </section>
 
-        {/* Why Texas Truckers Choose Us */}
+        {/* Why Truckers Choose Us */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Truckers Choose Us</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Truckers Choose Us</h2>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-8 w-8 text-primary" />
@@ -197,19 +198,11 @@ export default function TruckingInsurancePage() {
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#f98125]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-8 w-8 text-[#f98125]" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Fast Claims Processing</h3>
-                <p className="text-muted-foreground">Quick claim resolution with 24/7 support when incidents happen on the road.</p>
-              </div>
-              
-              <div className="text-center">
                 <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Local Houston Service</h3>
-                <p className="text-muted-foreground">Personal service from agents who understand Texas trucking conditions.</p>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Local Service</h3>
+                <p className="text-muted-foreground">Personal service from agents who understand trucking industry conditions.</p>
               </div>
             </div>
           </div>
@@ -221,7 +214,7 @@ export default function TruckingInsurancePage() {
             <Truck className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Keep Your Fleet Protected?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join hundreds of Houston trucking companies who trust Minarco Insurance for their commercial coverage.
+              Join hundreds of trucking companies who trust Minarco Insurance for their commercial coverage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 

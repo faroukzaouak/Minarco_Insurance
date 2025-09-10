@@ -21,8 +21,8 @@ const features = [
   },
   {
     icon: Clock,
-    title: "24/7 Claims Support", 
-    description: "Round-the-clock assistance when you need to file a claim or report an accident"
+    title: "Expert Guidance", 
+    description: "Professional advice and personalized recommendations for your coverage needs"
   },
   {
     icon: Users,
@@ -67,12 +67,12 @@ export default function AutoInsurancePage() {
                   Auto Insurance
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                  Drive with Confidence in Houston
+                  Drive with Confidence
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed">
                   Protect yourself and your vehicle with comprehensive auto insurance coverage. 
                   From liability to full coverage, we'll find the perfect policy that fits your 
-                  budget and gives you peace of mind on Houston roads.
+                  budget and gives you peace of mind on the road.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
@@ -184,10 +184,10 @@ export default function AutoInsurancePage() {
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Drivers Choose Us</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Drivers Choose Us</h2>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-8 w-8 text-primary" />
@@ -197,19 +197,11 @@ export default function AutoInsurancePage() {
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#f98125]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-8 w-8 text-[#f98125]" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Fast Claims Processing</h3>
-                <p className="text-muted-foreground">Quick claim resolution with 24/7 support when accidents happen.</p>
-              </div>
-              
-              <div className="text-center">
                 <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Local Houston Service</h3>
-                <p className="text-muted-foreground">Personal service from agents who understand Houston driving conditions.</p>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Local Service</h3>
+                <p className="text-muted-foreground">Personal service from agents who understand Texas driving conditions.</p>
               </div>
             </div>
           </div>
@@ -221,7 +213,7 @@ export default function AutoInsurancePage() {
             <Car className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Hit the Road Protected?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join thousands of Houston drivers who trust Minarco Insurance for their auto coverage.
+              Join thousands of drivers who trust Minarco Insurance for their auto coverage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 

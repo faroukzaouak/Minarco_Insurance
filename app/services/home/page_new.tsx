@@ -1,9 +1,12 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { QuoteForm } from "@/components/quote-form"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Home, Shield, DollarSign, Clock, CheckCircle, Users, Star, Phone, Zap } from "lucide-react"
+import MainContentTransition from "@/components/main-content-transition"
 
 const features = [
   {
@@ -55,7 +58,7 @@ export default function HomeInsurancePage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-1">
+      <MainContentTransition>
         {/* Hero Section */}
         <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/5 to-[#f98125]/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,11 +69,11 @@ export default function HomeInsurancePage() {
                   Homeowners Insurance
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                  Protect Your Houston Home
+                  Protect Your Home
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed">
                   Your home is your biggest investment. Protect it with comprehensive homeowners insurance 
-                  that covers structure, belongings, and liability. Built for Texas weather and Houston living.
+                  that covers structure, belongings, and liability. Built for Texas weather and quality living.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="bg-primary hover:bg-primary/90">
@@ -145,7 +148,7 @@ export default function HomeInsurancePage() {
               <div>
                 <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">Available Discounts</h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Save money with our discount programs. Houston homeowners save an average 
+                  Save money with our discount programs. Homeowners save an average 
                   of $600 per year when bundling home and auto insurance.
                 </p>
                 
@@ -178,11 +181,11 @@ export default function HomeInsurancePage() {
           </div>
         </section>
 
-        {/* Why Houston Homeowners Choose Us */}
+        {/* Why Homeowners Choose Us */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Houston Homeowners Choose Us</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why Homeowners Choose Us</h2>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -191,7 +194,7 @@ export default function HomeInsurancePage() {
                   <Zap className="h-8 w-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Texas Weather Ready</h3>
-                <p className="text-muted-foreground">Specialized coverage for hail, wind, and storm damage common in Houston.</p>
+                <p className="text-muted-foreground">Specialized coverage for hail, wind, and storm damage common in Texas.</p>
               </div>
               
               <div className="text-center">
@@ -207,7 +210,7 @@ export default function HomeInsurancePage() {
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Local Expertise</h3>
-                <p className="text-muted-foreground">Houston-based agents who understand local building codes and requirements.</p>
+                <p className="text-muted-foreground">Local agents who understand Texas building codes and requirements.</p>
               </div>
             </div>
           </div>
@@ -219,7 +222,7 @@ export default function HomeInsurancePage() {
             <Home className="h-16 w-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Protect Your Home?</h2>
             <p className="text-lg text-white/90 mb-8">
-              Join thousands of Houston homeowners who trust Minarco Insurance for their home protection.
+              Join thousands of homeowners who trust Minarco Insurance for their home protection.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-primary hover:bg-white/90">
@@ -231,7 +234,7 @@ export default function HomeInsurancePage() {
             </div>
           </div>
         </section>
-      </main>
+      </MainContentTransition>
       
       <Footer />
     </div>

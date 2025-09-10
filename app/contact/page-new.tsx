@@ -28,7 +28,7 @@ export default function ContactPage() {
                 Let's Protect What Matters Most
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Ready to secure your future? Our Houston insurance experts are here to help you find the perfect coverage. 
+                Ready to secure your future? Our insurance experts are here to help you find the perfect coverage. 
                 Get personalized quotes, expert advice, and unbeatable service.
               </p>
             </div>
@@ -135,7 +135,7 @@ export default function ContactPage() {
                     />
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#f19953] hover:to-[#e08843] text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      className="w-full bg-gradient-to-r from-[#f98125] to-[#f19953] hover:from-[#e08843] hover:to-[#d97a3c] text-white shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Get My Quote Now
                     </Button>
