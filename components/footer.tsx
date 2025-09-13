@@ -51,12 +51,18 @@ export function Footer() {
           <div>
             <h4 className="text-lg sm:text-xl xl:text-2xl 2xl:text-3xl font-semibold mb-4 sm:mb-6 xl:mb-8 text-[#f98125]">Our Services</h4>
             <ul className="space-y-2 sm:space-y-3 xl:space-y-4 text-white/80 text-sm sm:text-base xl:text-lg 2xl:text-xl">
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Auto Insurance</li>
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Home Insurance</li>
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Business Insurance</li>
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Commercial Auto</li>
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Life Insurance</li>
-              <li className="hover:text-[#f98125] transition-colors cursor-pointer">Renters Insurance</li>
+              <li>
+                <a href="/services/auto" className="hover:text-[#f98125] transition-colors cursor-pointer">Auto Insurance</a>
+              </li>
+              <li>
+                <a href="/services/home" className="hover:text-[#f98125] transition-colors cursor-pointer">Home Insurance</a>
+              </li>
+              <li>
+                <a href="/services/commercial" className="hover:text-[#f98125] transition-colors cursor-pointer">Commercial Insurance</a>
+              </li>
+              <li>
+                <a href="/services/trucking" className="hover:text-[#f98125] transition-colors cursor-pointer">Trucking Insurance</a>
+              </li>
             </ul>
           </div>
 

@@ -9,17 +9,37 @@ interface Company {
   alt: string
 }
 
+// Use static list of clean logos that definitely exist
+const staticCompanies = [
+  { name: 'Progressive', logo: '/company-logos/progressive.svg', alt: 'Progressive Insurance Logo' },
+  { name: 'GEICO', logo: '/company-logos/geico.svg', alt: 'GEICO Insurance Logo' },
+  { name: 'BiBerk', logo: '/company-logos/biberk.svg', alt: 'BiBerk Insurance Logo' },
+  { name: 'Berkley Insurance', logo: '/company-logos/berkley-insurance.svg', alt: 'Berkley Insurance Logo' },
+  { name: 'Next Insurance', logo: '/company-logos/next-insurance.svg', alt: 'Next Insurance Logo' },
+  { name: 'USLI', logo: '/company-logos/usli.svg', alt: 'USLI Insurance Logo' },
+  { name: 'American Risk', logo: '/company-logos/american-risk.svg', alt: 'American Risk Insurance Logo' },
+  { name: 'Wellington', logo: '/company-logos/wellington.svg', alt: 'Wellington Insurance Logo' },
+  { name: 'Coverwhale', logo: '/company-logos/coverwhale.svg', alt: 'Coverwhale Insurance Logo' }
+]
+
 export default function CompaniesCarousel() {
-  const [companies, setCompanies] = useState<Company[]>([])
+  const [companies, setCompanies] = useState<Company[]>(staticCompanies)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimationSupported, setIsAnimationSupported] = useState(true)
 
   useEffect(() => {
-    // Fetch the list of images from the API route
+    // Try to fetch from API, but fall back to static list
     fetch('/api/company-logos')
       .then(res => res.json())
-      .then(data => setCompanies(data))
-      .catch(err => console.error('Error loading company logos:', err))
+      .then(data => {
+        if (data && data.length > 0) {
+          setCompanies(data)
+        }
+      })
+      .catch(err => {
+        console.log('Using static logos, API error:', err)
+        // Keep using static list
+      })
   }, [])
 
   useEffect(() => {
@@ -121,7 +141,7 @@ export default function CompaniesCarousel() {
                   className="flex items-center justify-center"
                   style={{ height: '120px' }}
                 >
-                  <div className="relative w-full h-full flex items-center justify-center bg-white rounded-xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow duration-300 group">
+                  <div className="relative w-full h-full flex items-center justify-center p-6 hover:scale-105 transition-all duration-300 group">
                     <Image
                       src={company.logo}
                       alt={company.alt}
@@ -129,6 +149,13 @@ export default function CompaniesCarousel() {
                       height={90}
                       className="object-contain max-w-full max-h-full filter brightness-90 contrast-110 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-300"
                       style={{ backgroundColor: 'transparent' }}
+                      onError={(e) => {
+                        console.log(`Failed to load logo: ${company.logo}`)
+                        e.currentTarget.style.display = 'none'
+                      }}
+                      onLoad={() => {
+                        console.log(`Successfully loaded: ${company.logo}`)
+                      }}
                     />
                   </div>
                 </div>

@@ -479,15 +479,19 @@ export function Contact() {
         <div className="mt-12 sm:mt-16 lg:mt-20 xl:mt-24 2xl:mt-28 text-center">
           <h3 className="text-2xl sm:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-[#11224d] mb-8 sm:mb-12 xl:mb-16">Find the Right Coverage for You</h3>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 xl:gap-6">
-            {["Auto Insurance", "Homeowners Insurance", "Business Insurance", "Commercial Auto", "Life Insurance", "Renters Insurance"].map((type) => (
-              <Button
-                key={type}
-                variant="outline"
-                onClick={() => handleServiceClick(type)}
-                className="px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white hover:border-[#1a7bc4] transition-all duration-300 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
+            {[
+              { name: "Auto Insurance", link: "/services/auto" },
+              { name: "Home Insurance", link: "/services/home" },
+              { name: "Commercial Insurance", link: "/services/commercial" },
+              { name: "Trucking Insurance", link: "/services/trucking" }
+            ].map((service) => (
+              <a
+                key={service.name}
+                href={service.link}
+                className="inline-block px-3 sm:px-6 xl:px-8 py-2 sm:py-3 xl:py-4 text-xs sm:text-base xl:text-lg bg-white border-2 border-[#218eec] text-[#218eec] hover:bg-[#218eec] hover:text-white hover:border-[#1a7bc4] transition-all duration-300 shadow-md hover:shadow-lg xl:hover:shadow-xl rounded-lg xl:rounded-xl cursor-pointer"
               >
-                {type}
-              </Button>
+                {service.name}
+              </a>
             ))}
           </div>
         </div>

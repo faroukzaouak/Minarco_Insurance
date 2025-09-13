@@ -8,12 +8,29 @@ const companyNameMapping: { [key: string]: string } = {
   'geico': 'GEICO',
   'biberk': 'BiBerk',
   'berkeley': 'Berkeley Insurance',
+  'berkley': 'Berkley Insurance',
+  'next-insurance': 'Next Insurance',
   'next': 'Next Insurance',
   'usli': 'USLI',
+  'american-risk': 'American Risk',
   'american': 'American Risk',
   'wellington': 'Wellington',
   'coverwhale': 'Coverwhale',
   // Add more mappings as needed
+}
+
+// Preferred file mapping - prioritize clean SVG files
+const preferredFiles: { [key: string]: string } = {
+  'Progressive': 'progressive.svg',
+  'GEICO': 'geico.svg',
+  'BiBerk': 'biberk.svg',
+  'Berkeley Insurance': 'berkley-insurance.svg',
+  'Berkley Insurance': 'berkley-insurance.svg',
+  'Next Insurance': 'next-insurance.svg',
+  'USLI': 'usli.svg',
+  'American Risk': 'american-risk.svg',
+  'Wellington': 'wellington.svg',
+  'Coverwhale': 'coverwhale.svg',
 }
 
 function getCompanyNameFromFilename(filename: string): string {
@@ -51,15 +68,36 @@ export async function GET() {
       imageExtensions.some(ext => file.toLowerCase().endsWith(ext))
     )
 
-    // Create company objects
-    const companies = imageFiles.map(file => {
+    // Create company objects with preferred files
+    const companyMap = new Map<string, any>()
+    
+    // First pass: identify all companies
+    imageFiles.forEach(file => {
       const companyName = getCompanyNameFromFilename(file)
-      return {
-        name: companyName,
-        logo: `/company-logos/${file}`,
-        alt: `${companyName} Logo`
+      if (!companyMap.has(companyName)) {
+        companyMap.set(companyName, {
+          name: companyName,
+          logo: `/company-logos/${file}`,
+          alt: `${companyName} Logo`
+        })
       }
     })
+    
+    // Second pass: use preferred files if available
+    imageFiles.forEach(file => {
+      const companyName = getCompanyNameFromFilename(file)
+      const preferredFile = preferredFiles[companyName]
+      
+      if (preferredFile && file === preferredFile) {
+        companyMap.set(companyName, {
+          name: companyName,
+          logo: `/company-logos/${file}`,
+          alt: `${companyName} Logo`
+        })
+      }
+    })
+
+    const companies = Array.from(companyMap.values())
 
     return NextResponse.json(companies)
   } catch (error) {
